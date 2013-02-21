@@ -1,0 +1,40 @@
+-- default desktop configuration for Fedora
+
+import System.Posix.Env (getEnv)
+import Data.Maybe (maybe)
+
+import XMonad
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.ManageDocks
+import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.EZConfig(additionalKeys)
+import System.IO
+
+myManageHook = composeAll
+    [ className =? "Gimp"      --> doFloat
+    , className =? "Vncviewer" --> doFloat
+    , className =? "Skype"     --> doFloat
+    , className =? "Qq"        --> doFloat
+    , className =? "Tomboy"    --> doFloat
+    , className =? "Transmission" --> doFloat
+    , className =? "Vlc"       --> doFloat
+    , className =? "VirtualBox" --> doFloat
+    , className =? "Skype"     --> doFloat
+    , className =? "gxine"     --> doFloat
+    ]
+
+myXmonadBar = "dzen2 -x '1440' -y '0' -h '24' -w '640' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
+
+main = do
+    xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmobarrc"
+    xmonad $ defaultConfig
+        { manageHook = manageDocks <+> myManageHook -- make sure to include myManageHook definition from above
+                        <+> manageHook defaultConfig
+        , layoutHook = avoidStruts  $  layoutHook defaultConfig
+        , logHook = dynamicLogWithPP $ xmobarPP
+                        { ppOutput = hPutStrLn xmproc
+                        , ppTitle = xmobarColor "green" "" . shorten 50
+                        }
+        , terminal = "gnome-terminal"
+        , modMask = mod4Mask     -- Rebind Mod to the Windows key
+        }
