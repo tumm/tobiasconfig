@@ -1,3 +1,5 @@
-feh --bg-scale ~/Pictures/artleo.com-11814.jpg &
+feh --bg-scale ~/config/backgrounds/artleo.com-11814.jpg &
 trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --alpha 0 --tint 0x000000 --height 14 &
 nm-applet &
+xfce4-volumed &
+xfce4-power-manager &
