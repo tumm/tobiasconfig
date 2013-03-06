@@ -1,3 +1,5 @@
+let g:pathogen_disabled = []
+call add(g:pathogen_disabled, 'jedi-vim')
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
@@ -12,3 +14,7 @@ set sw=4
 set ts=4
 set expandtab
 set autoindent
+
+set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+
+set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
