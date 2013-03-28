@@ -10,6 +10,8 @@ import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
 import System.IO
 
+import XMonad.Hooks.SetWMName
+
 myManageHook = composeAll
     [ className =? "Gimp"      --> doFloat
     , className =? "Vncviewer" --> doFloat
@@ -34,7 +36,8 @@ main = do
         , logHook = dynamicLogWithPP $ xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
-                        }
+                        } 
         , terminal = "gnome-terminal"
         , modMask = mod4Mask     -- Rebind Mod to the Windows key
+        , startupHook = setWMName "LG3D"
         }

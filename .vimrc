@@ -18,3 +18,4 @@ set autoindent
 set rtp+=~/.local/lib/python2.7/site-packages/powerline/bindings/vim/
 
 set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+set tags+=$HOME/config/tags/python27.ctags
