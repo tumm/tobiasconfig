@@ -23,9 +23,20 @@ Plugin 'marijnh/tern_for_vim'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tmhedberg/matchit'
 Plugin 'pbrisbin/vim-syntax-shakespeare'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-fugitive'
+" Plugin 'eagletmt/ghcmod-vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'majutsushi/tagbar'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+let g:syntastic_javascript_checkers = ['jshint']
+" let g:syntastic_disabled_filetypes=['python']
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "passive_filetypes": ["python"] }
 
 " ==========================================================
 " Shortcuts
@@ -35,6 +46,9 @@ command! W :w
 
 " Allow pasting blocks of code without indenting
 set pastetoggle=<F2>
+
+" TagBar
+nmap <F8> :TagbarToggle<CR>
 
 " Let me save files with sudo
 cmap w!! w !sudo tee % >/dev/null
@@ -86,9 +100,21 @@ set autoindent
 
 set completeopt-=preview
 
+set noendofline
+
 
 "au BufRead *.js set makeprg=jslint\ %
 " Use tab to scroll through autocomplete menus
 autocmd Filetype javascript set sw=4 ts=4 noexpandtab
 autocmd Filetype html set sw=4 ts=4 noexpandtab
+autocmd Filetype haskell set sw=2 ts=2 expandtab
 "let g:acp_completeoptPreview=1
+" "
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0

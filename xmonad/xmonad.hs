@@ -8,6 +8,9 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Hooks.SetWMName
+import XMonad.Hooks.ICCCMFocus
+import XMonad.Hooks.EwmhDesktops
 import System.IO
 
 import XMonad.Hooks.SetWMName
@@ -29,15 +32,16 @@ myXmonadBar = "dzen2 -x '1440' -y '0' -h '24' -w '640' -ta 'l' -fg '#FFFFFF' -bg
 
 main = do
     xmproc <- spawnPipe "/usr/bin/xmobar ~/.xmobarrc"
-    xmonad $ defaultConfig
+    xmonad $ ewmh defaultConfig
         { manageHook = manageDocks <+> myManageHook -- make sure to include myManageHook definition from above
                         <+> manageHook defaultConfig
+        , handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook
         , layoutHook = avoidStruts  $  layoutHook defaultConfig
         , logHook = dynamicLogWithPP $ xmobarPP
                         { ppOutput = hPutStrLn xmproc
                         , ppTitle = xmobarColor "green" "" . shorten 50
-                        } 
+                        }
         , terminal = "gnome-terminal"
         , modMask = mod4Mask     -- Rebind Mod to the Windows key
-        , startupHook = setWMName "LG3D"
+        -- , startupHook = setWMName "LG3D"
         }
