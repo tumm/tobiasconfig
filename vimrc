@@ -60,6 +60,7 @@ set wm=0
 set nowrap
 set linebreak
 
+" Dan was here
 
 " ==========================================================
 " Basic Settings
